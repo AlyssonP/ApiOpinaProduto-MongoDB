@@ -28,6 +28,22 @@ public class UserService {
         return userRepository.insert(user);
     }
     
+    public User updateUser(User user) {
+        Optional<User> newUser = userRepository.findById(user.getId());
+        updateData(newUser.get(), user);
+        return userRepository.save(newUser.get());
+    }
+    
+    public void updateData(User newUser, User user) {
+        newUser.setNome(user.getNome());
+        newUser.setEmail(user.getEmail());
+    }
+    
+    public void deleteUser(String id) {
+        findById(id);
+        userRepository.deleteById(id);
+    }
+    
     public User fromDTO(UserDTO userDto) {
         return new User(userDto.getId(), userDto.getNome(), userDto.getEmail());
     }
