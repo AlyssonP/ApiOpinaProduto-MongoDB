@@ -31,6 +31,19 @@ public class ProdutoService {
         produtoRepository.insert(produto);
     }
     
+    public void updateProduto(Produto produto) {
+        Produto newProduto = findById(produto.getId());
+        updateData(newProduto, produto);
+        produtoRepository.save(newProduto);
+    }
+    
+    public void updateData(Produto newProduto, Produto produto) {
+        newProduto.setNome(produto.getNome());
+        newProduto.setDescricao(produto.getDescricao());
+        newProduto.setCategoria(produto.getCategoria());
+        newProduto.setPreco(produto.getPreco());
+    }
+    
     public Produto fromDTO(ProdutoDTO produtoDTO, AutorDTO autorDTO) {
         return new Produto(
                 produtoDTO.getId(), 
