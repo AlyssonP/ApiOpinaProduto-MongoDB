@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.domain.Produto;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.example.domain.User;
@@ -21,7 +22,7 @@ public class UserService {
     
     public User findById(String id) {
         Optional<User> user = userRepository.findById(id);
-        return user.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+        return user.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado"));
     }
     
     public User insertUser(User user) {
@@ -37,6 +38,12 @@ public class UserService {
     public void updateData(User newUser, User user) {
         newUser.setNome(user.getNome());
         newUser.setEmail(user.getEmail());
+    }
+    
+    public void addRefProduto(Produto produto) {
+        User user = findById(produto.getAutor().getId());
+        user.getProdutos().add(produto);
+        userRepository.save(user);
     }
     
     public void deleteUser(String id) {
