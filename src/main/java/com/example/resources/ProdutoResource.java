@@ -2,7 +2,6 @@ package com.example.resources;
 
 import com.example.service.ProdutoService;
 import com.example.domain.Produto;
-import com.example.domain.User;
 import com.example.dto.AutorDTO;
 import com.example.dto.ProdutoDTO;
 import com.example.service.UserService;
@@ -49,7 +48,10 @@ public class ProdutoResource {
         produtoService.insertProduto(produto);
         userService.addRefProduto(produto);
         
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(produto.getId()).toUri();
+        String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+        URI uri = ServletUriComponentsBuilder.fromPath(baseUrl+"/produtos/{id}")
+                .buildAndExpand(produto.getId())
+                .toUri();
         
         return ResponseEntity.created(uri).build();
     }
