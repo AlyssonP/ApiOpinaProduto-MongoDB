@@ -1,5 +1,6 @@
 package com.example.resources;
 
+import com.example.domain.Produto;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.domain.User;
@@ -54,7 +55,7 @@ public class UserResource {
     public ResponseEntity<Void> updateUser(@RequestBody UserDTO userDto, @PathVariable String id){
         User user = userService.fromDTO(userDto);
         user.setId(id);
-        User obj = userService.updateUser(user);
+        userService.updateUser(user);
         return ResponseEntity.noContent().build();
     }
     
@@ -62,6 +63,12 @@ public class UserResource {
     public ResponseEntity<Void> deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
+    }
+    
+    @GetMapping(value = "/{id}/produtos")
+    public ResponseEntity<List<Produto>> findProdutos(@PathVariable String id){
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(user.getProdutos());
     }
     
 }
