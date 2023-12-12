@@ -29,28 +29,28 @@ public class Instantiation implements CommandLineRunner{
         userRepo.deleteAll();
         produtoRepo.deleteAll();
         
-        User teste = new User(null, "Teste nome", "teste@email.com");
-        User admin = new User(null, "Admin teste", "admin@email.com");
+        User fulano = new User(null, "Fulano", "fulano@email.com");
+        User ciclano = new User(null, "Ciclano", "ciclano@email.com");
         
-        userRepo.saveAll(Arrays.asList(teste, admin));
+        userRepo.saveAll(Arrays.asList(fulano, ciclano));
         
-        Produto teclado = new Produto(null, "Teclado", "Teclado Slim", "Eletronicos", 49.99, new AutorDTO(teste));
+        Produto teclado = new Produto(null, "Teclado", "Teclado Slim", "Eletronicos", 49.99, new AutorDTO(fulano));
         
-        Produto mouse = new Produto(null, "Mouse", "Mouse Gamer 3200DPI", "Eletronicos", 59.99, new AutorDTO(teste));
+        Produto mouse = new Produto(null, "Mouse", "Mouse Gamer 3200DPI", "Eletronicos", 59.99, new AutorDTO(fulano));
         
-        Produto monitor = new Produto(null, "Monitor", "Mouse Gamer 144hz Curvo", "Eletronicos", 599.99, new AutorDTO(admin));
+        Produto monitor = new Produto(null, "Monitor", "Monitor Gamer 144hz Curvo", "Eletronicos", 599.99, new AutorDTO(ciclano));
         
-        AvaliacaoDTO avaliacao1 = new AvaliacaoDTO(new AutorDTO(teste),10,"Bom");
-        AvaliacaoDTO avaliacao2 = new AvaliacaoDTO(new AutorDTO(admin),0,"Ruim");
+        AvaliacaoDTO avaliacao1 = new AvaliacaoDTO(new AutorDTO(fulano),5,"Bom");
+        AvaliacaoDTO avaliacao2 = new AvaliacaoDTO(new AutorDTO(ciclano),0,"Ruim");
         
-        teclado.getAvaliacoes().add(avaliacao1);
-        monitor.getAvaliacoes().add(avaliacao2);
+        teclado.getAvaliacoes().add(avaliacao2);
+        monitor.getAvaliacoes().add(avaliacao1);
         
         produtoRepo.saveAll(Arrays.asList(teclado, mouse, monitor));
-        teste.getProdutos().addAll(Arrays.asList(teclado, mouse));
-        admin.getProdutos().addAll(Arrays.asList(monitor));
-        userRepo.save(teste);
-        userRepo.save(admin);
+        fulano.getProdutos().addAll(Arrays.asList(teclado, mouse));
+        ciclano.getProdutos().addAll(Arrays.asList(monitor));
+        userRepo.save(fulano);
+        userRepo.save(ciclano);
         
     }
     
