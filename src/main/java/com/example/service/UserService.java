@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.example.domain.User;
 import com.example.dto.UserDTO;
+import com.example.repository.ProdutoRepository;
 import com.example.repository.UserRepository;
 import com.example.service.exception.ObjectNotFoundException;
 import java.util.Optional;
@@ -15,6 +16,9 @@ public class UserService {
     
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private ProdutoRepository produtoRepository;
     
     public List<User> findAll(){
         return userRepository.findAll();
@@ -47,7 +51,8 @@ public class UserService {
     }
     
     public void deleteUser(String id) {
-        findById(id);
+        User user = findById(id);
+        produtoRepository.deleteAll(user.getProdutos());
         userRepository.deleteById(id);
     }
     
