@@ -47,9 +47,17 @@ public class UserResource {
         return ResponseEntity.ok().body(new UserDTO(user));
     }
     
-    @GetMapping(value = "{id}/produto")
+    // Buscando produtos do user por query do mongo
+    @GetMapping(value = "{id}/produtos")
     public ResponseEntity<List<Produto>> produtoAutor(@PathVariable String id) {
         return ResponseEntity.ok().body(produtoService.produtoAutor(id));
+    }
+    
+    // Buscando produtos do user por objeto
+    @GetMapping(value = "/{id}/produtos/por_obj")
+    public ResponseEntity<List<Produto>> findProdutos(@PathVariable String id){
+        User user = userService.findById(id);
+        return ResponseEntity.ok().body(user.getProdutos());
     }
     
     @PostMapping
@@ -72,12 +80,6 @@ public class UserResource {
     public ResponseEntity<Void> deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
-    }
-    
-    @GetMapping(value = "/{id}/produtos")
-    public ResponseEntity<List<Produto>> findProdutos(@PathVariable String id){
-        User user = userService.findById(id);
-        return ResponseEntity.ok().body(user.getProdutos());
     }
     
 }
