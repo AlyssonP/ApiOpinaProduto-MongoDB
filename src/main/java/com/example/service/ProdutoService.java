@@ -33,6 +33,10 @@ public class ProdutoService {
         return produto.orElseThrow(() -> new ObjectNotFoundException("Produto não encontrado"));
     }
     
+    public List<Produto> produtoAutor(String id) {
+        return produtoRepository.produtoAutor(id);
+    }
+    
     public void insertProduto(Produto produto) {
         produtoRepository.insert(produto);
     }

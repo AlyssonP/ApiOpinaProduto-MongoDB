@@ -21,8 +21,6 @@ public class AvaliacaoService {
     
     @Autowired
     private ProdutoRepository produtoRepository;
-    
-     
 
     public List<AvaliacaoDTO> findAllIdProd(String id){
         Produto produto = produtoService.findById(id);

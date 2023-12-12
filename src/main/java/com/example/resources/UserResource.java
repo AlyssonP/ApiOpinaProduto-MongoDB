@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.domain.User;
 import com.example.dto.UserDTO;
+import com.example.service.ProdutoService;
 import com.example.service.UserService;
 import java.net.URI;
 
@@ -29,6 +30,9 @@ public class UserResource {
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private ProdutoService produtoService;
+    
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll(){
         List<User> list = userService.findAll();
@@ -41,6 +45,11 @@ public class UserResource {
     public ResponseEntity<UserDTO> findById(@PathVariable String id){
         User user = userService.findById(id);
         return ResponseEntity.ok().body(new UserDTO(user));
+    }
+    
+    @GetMapping(value = "{id}/produto")
+    public ResponseEntity<List<Produto>> produtoAutor(@PathVariable String id) {
+        return ResponseEntity.ok().body(produtoService.produtoAutor(id));
     }
     
     @PostMapping

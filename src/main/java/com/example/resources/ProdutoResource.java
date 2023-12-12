@@ -80,12 +80,12 @@ public class ProdutoResource {
     }
     
     
+    // Rotas especificas para avaliações 
     @GetMapping(value="/{id}/avaliacoes")
     public ResponseEntity<List<AvaliacaoDTO>> findAllId(@PathVariable String id){
         List<AvaliacaoDTO> list = avaliacaoService.findAllIdProd(id);
         return ResponseEntity.ok().body(list);
     }
-    
     
     @PostMapping(value = "/{id}/avaliacoes/{idAutor}")
     public ResponseEntity<Void> insertAvaliacao(@PathVariable String idAutor, @RequestBody AvaliacaoDTO avaliacao, @PathVariable String id){
