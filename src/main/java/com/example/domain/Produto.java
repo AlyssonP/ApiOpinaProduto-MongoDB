@@ -11,13 +11,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-/**
- *
- * @author klnyagor
- */
-
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Document(collection="produtos")
 public class Produto implements Serializable{

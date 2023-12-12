@@ -31,7 +31,7 @@ public class AvaliacaoService {
     }
     
     public void insertAvaliacao(AutorDTO autor, int nota, String comentario, String idProd){
-        AvaliacaoDTO avaliacao = new AvaliacaoDTO(null, autor, nota, comentario);
+        AvaliacaoDTO avaliacao = new AvaliacaoDTO(autor, nota, comentario);
         Produto produto = produtoService.findById(idProd);
         produto.getAvaliacoes().add(avaliacao);
         produtoRepository.save(produto);

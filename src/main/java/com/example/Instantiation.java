@@ -40,8 +40,8 @@ public class Instantiation implements CommandLineRunner{
         
         Produto monitor = new Produto(null, "Monitor", "Mouse Gamer 144hz Curvo", "Eletronicos", 599.99, new AutorDTO(admin));
         
-        AvaliacaoDTO avaliacao1 = new AvaliacaoDTO(null, new AutorDTO(teste),10,"Bom");
-        AvaliacaoDTO avaliacao2 = new AvaliacaoDTO(null, new AutorDTO(admin),0,"Ruim");
+        AvaliacaoDTO avaliacao1 = new AvaliacaoDTO(new AutorDTO(teste),10,"Bom");
+        AvaliacaoDTO avaliacao2 = new AvaliacaoDTO(new AutorDTO(admin),0,"Ruim");
         
         teclado.getAvaliacoes().add(avaliacao1);
         monitor.getAvaliacoes().add(avaliacao2);
