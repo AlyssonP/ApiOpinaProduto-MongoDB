@@ -87,7 +87,7 @@ public class ProdutoResource {
         return ResponseEntity.ok().body(list);
     }
     
-    @PostMapping(value = "/{id}/avaliacoes/{idAutor}")
+    @PostMapping(value = "/{id}/avaliar/{idAutor}")
     public ResponseEntity<Void> insertAvaliacao(@PathVariable String idAutor, @RequestBody AvaliacaoDTO avaliacao, @PathVariable String id){
         AutorDTO autor = new AutorDTO(userService.findById(idAutor));
         avaliacaoService.insertAvaliacao(autor, avaliacao.getNota(), avaliacao.getComentario(), id);
