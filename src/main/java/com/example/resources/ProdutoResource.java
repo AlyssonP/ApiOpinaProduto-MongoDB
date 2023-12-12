@@ -80,7 +80,9 @@ public class ProdutoResource {
     }
     
     
-    // Rotas especificas para avaliações 
+    
+    // Rotas especificas para avaliações
+    
     @GetMapping(value="/{id}/avaliacoes")
     public ResponseEntity<List<AvaliacaoDTO>> findAllId(@PathVariable String id){
         List<AvaliacaoDTO> list = avaliacaoService.findAllIdProd(id);
@@ -92,6 +94,19 @@ public class ProdutoResource {
         AutorDTO autor = new AutorDTO(userService.findById(idAutor));
         avaliacaoService.insertAvaliacao(autor, avaliacao.getNota(), avaliacao.getComentario(), id);
         
+        return ResponseEntity.noContent().build();
+    }
+    
+    @PutMapping(value = "/avaliacoes/{id}")
+    public ResponseEntity<Void> updateAvaliacao(@PathVariable String id, @RequestBody AvaliacaoDTO avaliacao) {
+        avaliacao.setId(id);
+        avaliacaoService.updateAvaliacao(avaliacao);
+        return ResponseEntity.noContent().build();
+    }
+    
+    @DeleteMapping(value = "/avaliacoes/{id}")
+    public ResponseEntity<Void> updateAvaliacao(@PathVariable String id) {
+        avaliacaoService.deleteAvaliacao(id);
         return ResponseEntity.noContent().build();
     }
 }

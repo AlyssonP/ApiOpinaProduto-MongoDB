@@ -12,4 +12,7 @@ public interface ProdutoRepository extends MongoRepository<Produto, String>{
     @Query(value = "{\"autor._id\": ObjectId('?0')}")
     public List<Produto> produtoAutor(String id);
     
+    @Query(value = "{\"avaliacoes._id\": '?0'}")
+    public Produto produtoAvaliacao(String id);
+    
 }
