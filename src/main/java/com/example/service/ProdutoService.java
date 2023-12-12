@@ -10,6 +10,7 @@ import com.example.service.exception.ObjectNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,7 +31,7 @@ public class ProdutoService {
     
     public Produto findById(String id){
         Optional<Produto> produto = produtoRepository.findById(id);
-        return produto.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
+        return produto.orElseThrow(() -> new ObjectNotFoundException("Produto não encontrado"));
     }
     
     public void insertProduto(Produto produto) {
@@ -78,4 +79,5 @@ public class ProdutoService {
                 autorDTO
         );
     }
+    
 }

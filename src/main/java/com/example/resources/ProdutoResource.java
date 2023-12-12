@@ -3,7 +3,9 @@ package com.example.resources;
 import com.example.service.ProdutoService;
 import com.example.domain.Produto;
 import com.example.dto.AutorDTO;
+import com.example.dto.AvaliacaoDTO;
 import com.example.dto.ProdutoDTO;
+import com.example.service.AvaliacaoService;
 import com.example.service.UserService;
 import java.net.URI;
 import java.util.List;
@@ -29,6 +31,10 @@ public class ProdutoResource {
     @Autowired
     private UserService userService;
     
+    
+    @Autowired
+    private AvaliacaoService avaliacaoService;
+    
     @GetMapping
     public ResponseEntity<List<Produto>> findAll(){
         List<Produto> list = produtoService.findAll();
@@ -43,7 +49,7 @@ public class ProdutoResource {
     
     @PostMapping(value = "/{idAutor}")
     public ResponseEntity<Void> insertProduto(@PathVariable String idAutor, @RequestBody ProdutoDTO produtoDTO) {
-        AutorDTO autorDTO = new AutorDTO(userService.findById(idAutor));;
+        AutorDTO autorDTO = new AutorDTO(userService.findById(idAutor));
         
         Produto produto = produtoService.fromDTO(produtoDTO, autorDTO);
         produtoService.insertProduto(produto);
@@ -70,6 +76,22 @@ public class ProdutoResource {
         produtoDTO.setId(id);
         produto = produtoService.fromDTO(produtoDTO, produto.getAutor());
         produtoService.updateProduto(produto);
+        return ResponseEntity.noContent().build();
+    }
+    
+    
+    @GetMapping(value="/{id}/avaliacoes")
+    public ResponseEntity<List<AvaliacaoDTO>> findAllId(@PathVariable String id){
+        List<AvaliacaoDTO> list = avaliacaoService.findAllIdProd(id);
+        return ResponseEntity.ok().body(list);
+    }
+    
+    
+    @PostMapping(value = "/{id}/avaliacoes/{idAutor}")
+    public ResponseEntity<Void> insertAvaliacao(@PathVariable String idAutor, @RequestBody AvaliacaoDTO avaliacao, @PathVariable String id){
+        AutorDTO autor = new AutorDTO(userService.findById(idAutor));
+        avaliacaoService.insertAvaliacao(autor, avaliacao.getNota(), avaliacao.getComentario(), id);
+        
         return ResponseEntity.noContent().build();
     }
 }

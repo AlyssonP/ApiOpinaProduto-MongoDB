@@ -4,10 +4,7 @@ import java.io.Serializable;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
-/**
- *
- * @author klnyagor
- */
+
 
 @Data
 public class AvaliacaoDTO implements Serializable {
@@ -23,9 +20,11 @@ public class AvaliacaoDTO implements Serializable {
         
     }
     
-    public AvaliacaoDTO(AutorDTO autor, int nota, String comentario){
+    public AvaliacaoDTO(String id, AutorDTO autor, int nota, String comentario){
+        this.id = id;
         this.autor = autor;
         this.nota = nota;
         this.comentario = comentario;
     }
+    
 }

@@ -8,6 +8,7 @@ import com.example.domain.Produto;
 import java.util.Arrays;
 import com.example.domain.User;
 import com.example.dto.AutorDTO;
+import com.example.dto.AvaliacaoDTO;
 import com.example.repository.ProdutoRepository;
 import com.example.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,12 @@ public class Instantiation implements CommandLineRunner{
         Produto mouse = new Produto(null, "Mouse", "Mouse Gamer 3200DPI", "Eletronicos", 59.99, new AutorDTO(teste));
         
         Produto monitor = new Produto(null, "Monitor", "Mouse Gamer 144hz Curvo", "Eletronicos", 599.99, new AutorDTO(admin));
+        
+        AvaliacaoDTO avaliacao1 = new AvaliacaoDTO(null, new AutorDTO(teste),10,"Bom");
+        AvaliacaoDTO avaliacao2 = new AvaliacaoDTO(null, new AutorDTO(admin),0,"Ruim");
+        
+        teclado.getAvaliacoes().add(avaliacao1);
+        monitor.getAvaliacoes().add(avaliacao2);
         
         produtoRepo.saveAll(Arrays.asList(teclado, mouse, monitor));
         teste.getProdutos().addAll(Arrays.asList(teclado, mouse));
