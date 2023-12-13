@@ -19,12 +19,12 @@
   > [spring initializr](https://start.spring.io/)
 
 ### Instalando o MongoDB
-> https://www.mongodb.com/try/download/community
+> https://www.mongodb.com/try/download/community <br />
 > https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/
 
 ### Configuração do Banco de Dados
 
->  ```#application.properties```
+>  ```#application.properties``` <br />
 >  ```spring.data.mongodb.uri=mongodb://localhost:{port}/{nomedobanco}```
 
 ## Entidades
