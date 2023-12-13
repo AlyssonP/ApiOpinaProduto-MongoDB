@@ -31,7 +31,6 @@ public class ProdutoResource {
     @Autowired
     private UserService userService;
     
-    
     @Autowired
     private AvaliacaoService avaliacaoService;
     
@@ -116,18 +115,18 @@ public class ProdutoResource {
         return ResponseEntity.ok().body(media);
     }
     
-    
-    @GetMapping(value="precoMaior/{preco}")
+    // Rotas para consultas personalizadas dos produtos
+    @GetMapping(value="/precoMaior/{preco}")
     public ResponseEntity<List<Produto>> preocoMaior(@PathVariable float preco){
         return ResponseEntity.ok().body(produtoService.precoMaior(preco));
     }
     
-    @GetMapping(value="precoMenor/{preco}")
+    @GetMapping(value="/precoMenor/{preco}")
     public ResponseEntity<List<Produto>> preocoMenor(@PathVariable float preco){
         return ResponseEntity.ok().body(produtoService.precoMenor(preco));
     }
     
-    @GetMapping(value="produtoCategoria/{categoria}")
+    @GetMapping(value="/produtoCategoria/{categoria}")
     public ResponseEntity<List<Produto>> produtoCategoria(@PathVariable String categoria){
         return ResponseEntity.ok().body(produtoService.produtoCategoria(categoria));
     }
