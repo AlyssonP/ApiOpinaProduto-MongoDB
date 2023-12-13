@@ -109,13 +109,15 @@ public class ProdutoResource {
         return ResponseEntity.noContent().build();
     }
     
-    @GetMapping(value="media/{id}")
+    @GetMapping(value="{id}/avaliacoes/media")
     public ResponseEntity<Float> mediaNota(@PathVariable String id){
         float media = produtoService.mediaNota(id);
         return ResponseEntity.ok().body(media);
     }
     
+    
     // Rotas para consultas personalizadas dos produtos
+    
     @GetMapping(value="/precoMaior/{preco}")
     public ResponseEntity<List<Produto>> preocoMaior(@PathVariable float preco){
         return ResponseEntity.ok().body(produtoService.precoMaior(preco));
