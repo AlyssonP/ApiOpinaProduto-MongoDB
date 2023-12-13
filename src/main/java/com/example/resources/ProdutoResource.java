@@ -109,4 +109,26 @@ public class ProdutoResource {
         avaliacaoService.deleteAvaliacao(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @GetMapping(value="media/{id}")
+    public ResponseEntity<Float> mediaNota(@PathVariable String id){
+        float media = produtoService.mediaNota(id);
+        return ResponseEntity.ok().body(media);
+    }
+    
+    
+    @GetMapping(value="precoMaior/{preco}")
+    public ResponseEntity<List<Produto>> preocoMaior(@PathVariable float preco){
+        return ResponseEntity.ok().body(produtoService.precoMaior(preco));
+    }
+    
+    @GetMapping(value="precoMenor/{preco}")
+    public ResponseEntity<List<Produto>> preocoMenor(@PathVariable float preco){
+        return ResponseEntity.ok().body(produtoService.precoMenor(preco));
+    }
+    
+    @GetMapping(value="produtoCategoria/{categoria}")
+    public ResponseEntity<List<Produto>> produtoCategoria(@PathVariable String categoria){
+        return ResponseEntity.ok().body(produtoService.produtoCategoria(categoria));
+    }
 }

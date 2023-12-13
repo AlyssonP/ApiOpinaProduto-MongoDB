@@ -15,4 +15,13 @@ public interface ProdutoRepository extends MongoRepository<Produto, String>{
     @Query(value = "{\"avaliacoes._id\": '?0'}")
     public Produto produtoAvaliacao(String id);
     
+    @Query(value = "{\"preco\":{$gt:?0}}")
+    public List<Produto> precoMaior(float valor);
+    
+    @Query(value = "{\"preco\":{$lt:?0}}")
+    public List<Produto> precoMenor(float valor);
+    
+    @Query(value = "{categoria:{$all:[?0]}}")
+    public List<Produto> produtoCategoria(String categoria);
+    
 }

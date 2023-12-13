@@ -4,6 +4,7 @@ import com.example.repository.ProdutoRepository;
 import com.example.domain.Produto;
 import com.example.domain.User;
 import com.example.dto.AutorDTO;
+import com.example.dto.AvaliacaoDTO;
 import com.example.dto.ProdutoDTO;
 import com.example.repository.UserRepository;
 import com.example.service.exception.ObjectNotFoundException;
@@ -70,6 +71,29 @@ public class ProdutoService {
         }   
         
         produtoRepository.deleteById(id);
+    }
+    
+    
+    public float mediaNota(String id){
+        Produto produto = findById(id);
+        List<AvaliacaoDTO> avaliacoes = produto.getAvaliacoes();
+        float soma = 0;
+        for(int i = 0 ; i< avaliacoes.stream().count();i++){
+            soma += avaliacoes.get(i).getNota();
+        }
+        return soma/avaliacoes.stream().count();
+    }
+    
+    public List<Produto> precoMaior(float preco){
+        return produtoRepository.precoMaior(preco);
+    }
+    
+    public List<Produto> precoMenor(float preco){
+        return produtoRepository.precoMenor(preco);
+    }
+    
+    public List<Produto> produtoCategoria(String categoria){
+        return produtoRepository.produtoCategoria(categoria);
     }
     
     public Produto fromDTO(ProdutoDTO produtoDTO, AutorDTO autorDTO) {
